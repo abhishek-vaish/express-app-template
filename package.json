@@ -1,0 +1,46 @@
+{
+  "name": "express-app-template",
+  "version": "1.0.0",
+  "description": "ExpressJS Template in TypeScript",
+  "main": "app.js",
+  "scripts": {
+    "start:dev": "nodemon --exec ts-node src/app.ts runserver",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhishek-vaish/express-app-template.git"
+  },
+  "keywords": [
+    "expressjs",
+    "template",
+    "typescript"
+  ],
+  "author": "Abhishek Vaish",
+  "maintainers": [
+    {
+      "name": "Abhishek Vaish",
+      "email": "abhishek.vaish@acsicorp.com"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhishek-vaish/express-app-template/issues"
+  },
+  "homepage": "https://github.com/abhishek-vaish/express-app-template#readme",
+  "dependencies": {
+    "dotenv": "^16.1.3",
+    "express": "*",
+    "helmet": "*",
+    "joi": "*",
+    "morgan": "*"
+  },
+  "devDependencies": {
+    "@types/express": "*",
+    "@types/morgan": "^1.9.4",
+    "@types/node": "*",
+    "nodemon": "*",
+    "ts-node": "*",
+    "typescript": "*"
+  }
+}
