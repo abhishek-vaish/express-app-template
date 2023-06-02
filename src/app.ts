@@ -6,6 +6,7 @@ import { Server, ServerOptions } from "http";
 import logger from "morgan";
 
 import { LOG_FILE, RESOURCES_FILE } from "./constants";
+import { FILENOTFOUNDEXCEPTION } from "./constants/message";
 import { FileNotFoundException } from "./exceptions";
 import { IConfig } from "./interfaces/config";
 
@@ -17,7 +18,7 @@ async function bootstrap(): Promise<void> {
   try {
     config = JSON.parse(fs.readFileSync(RESOURCES_FILE, "utf-8"));
   } catch (e: unknown) {
-    throw new FileNotFoundException("Unable to find the file");
+    throw new FileNotFoundException(FILENOTFOUNDEXCEPTION);
   }
 
   // Initializing the constants
