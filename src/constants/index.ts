@@ -16,3 +16,5 @@ export const LOG_FILE: string = path.join(
   LOG_DIR,
   `${process.env.NODE_ENV}.log`
 );
+
+export const DB_PATH: string = path.join(PARENT_DIR, "dev.sqlite");

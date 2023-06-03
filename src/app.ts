@@ -4,23 +4,14 @@ import fs from "fs";
 import helmet from "helmet";
 import { Server, ServerOptions } from "http";
 import logger from "morgan";
+import { ConnectionError } from "sequelize";
 
-import { LOG_FILE, RESOURCES_FILE } from "./constants";
-import { FILENOTFOUNDEXCEPTION } from "./constants/message";
-import { FileNotFoundException } from "./exceptions";
-import { IConfig } from "./interfaces/config";
+import { LOG_FILE } from "./constants";
+import { config, sequelize } from "./utils";
 
 dotenv.config();
 
 async function bootstrap(): Promise<void> {
-  // Read Configuration File from the resources
-  let config: IConfig;
-  try {
-    config = JSON.parse(fs.readFileSync(RESOURCES_FILE, "utf-8"));
-  } catch (e: unknown) {
-    throw new FileNotFoundException(FILENOTFOUNDEXCEPTION);
-  }
-
   // Initializing the constants
   const PORT: number = config.default.port || 8000;
   const HOST: string = config.default.host;
@@ -41,6 +32,18 @@ async function bootstrap(): Promise<void> {
   const server: Server = new Server(serverOptions, application);
   server.listen(PORT, HOST, (): void => {
     console.log(server.address());
+
+    // Database Connection
+    try {
+      sequelize.getSequelize().authenticate();
+    } catch (e: unknown) {
+      if (e instanceof ConnectionError) {
+        throw {
+          name: e.name,
+          message: e.message,
+        };
+      }
+    }
   });
 }
 

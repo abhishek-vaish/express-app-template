@@ -3,7 +3,9 @@ interface IDefault {
   port: number;
 }
 
-interface IDatabase {}
+interface IDatabase {
+  uri: string;
+}
 
 export interface IConfig {
   default: IDefault;
